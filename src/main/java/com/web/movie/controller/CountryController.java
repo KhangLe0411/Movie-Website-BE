@@ -42,4 +42,13 @@ public class CountryController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/country")
+    public ResponseEntity<?> getAllCountries(){
+        try {
+            return new ResponseEntity<>(countryService.findAllCountry(), HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

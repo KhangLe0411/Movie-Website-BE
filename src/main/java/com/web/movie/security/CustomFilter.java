@@ -39,7 +39,7 @@ public class CustomFilter extends OncePerRequestFilter {
         }
         try {
             List<String> allowedPaths = Arrays.asList("/api/v1/auth", "/api/v1/home", "/api/v1/film", "/api/v1/genre",
-                    "/api/v1/country");
+                    "/api/v1/country", "/api/v1/actor");
             if(allowedPaths.stream().anyMatch(request.getServletPath()::contains)){
                 filterChain.doFilter(request, response);
                 return;

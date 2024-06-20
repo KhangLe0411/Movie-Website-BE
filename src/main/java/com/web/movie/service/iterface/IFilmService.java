@@ -6,6 +6,7 @@ import com.web.movie.entity.enumType.FilmType;
 import com.web.movie.payload.dto.FilmDTO;
 import com.web.movie.payload.dto.FilmDetailDTO;
 import com.web.movie.payload.dto.ReviewDTO;
+import com.web.movie.payload.request.CreateFilmRequest;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -20,4 +21,7 @@ public interface IFilmService {
     Page<FilmDTO> getFilmsOfCountry(String slug, FilmAccessType filmAccessType, Boolean status, Integer page, Integer limit);
 
     FilmDetailDTO findFilmByIdAndSlug(Integer id, String slug, FilmAccessType accessType);
+
+    List<Film> getAllFilms();
+    Film createFilm(CreateFilmRequest request);
 }

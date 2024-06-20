@@ -41,4 +41,13 @@ public class GenreController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/genre")
+    public ResponseEntity<?> getAllGenres(){
+       try{
+           return new ResponseEntity<>(genreService.findAllGenre(), HttpStatus.OK);
+       }catch (Exception e){
+           return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+       }
+    }
 }

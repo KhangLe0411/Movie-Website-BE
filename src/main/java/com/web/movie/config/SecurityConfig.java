@@ -56,8 +56,11 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/home/**").permitAll()
                         .requestMatchers("/api/v1/film/**").permitAll()
                         .requestMatchers("/api/v1/genre/**").permitAll()
+                        .requestMatchers("/api/v1/actor/**").permitAll()
                         .requestMatchers("/api/v1/country/**").permitAll()
                         .requestMatchers("/api/v1/review/**").permitAll()
+                        // Admin
+                        .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 );
         // If request No-Auth return 401 instead 403.

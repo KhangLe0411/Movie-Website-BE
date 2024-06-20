@@ -1,5 +1,6 @@
 package com.web.movie.config;
 
+import com.github.slugify.Slugify;
 import com.web.movie.service.implement.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -33,5 +34,13 @@ public class ApplicationConfig {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
+    }
+
+    @Bean
+    public Slugify slugify() {
+        return Slugify.builder()
+                .customReplacement("đ", "d")
+                .customReplacement("Đ", "D")
+                .build();
     }
 }

@@ -6,6 +6,7 @@ import com.web.movie.payload.dto.EpisodeDTO;
 import com.web.movie.payload.dto.FilmDTO;
 import com.web.movie.payload.dto.FilmDetailDTO;
 import com.web.movie.payload.dto.ReviewDTO;
+import com.web.movie.payload.request.CreateFilmRequest;
 import com.web.movie.service.iterface.IEpisodeService;
 import com.web.movie.service.iterface.IFilmService;
 import com.web.movie.service.iterface.IReviewService;
@@ -115,6 +116,24 @@ public class FilmController {
             episodeResponse.put("currentEpisode", currentEpisode);
             return new ResponseEntity<>(episodeResponse, HttpStatus.OK);
         } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/admin/films")
+    public ResponseEntity<?> getHomePage(){
+        try{
+            return new ResponseEntity<>(filmService.getAllFilms(), HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/admin/create")
+    public ResponseEntity<?> createFilm(CreateFilmRequest request){
+        try{
+            return new ResponseEntity<>(filmService.createFilm(request), HttpStatus.CREATED);
+        }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
