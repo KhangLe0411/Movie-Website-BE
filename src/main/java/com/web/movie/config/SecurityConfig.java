@@ -57,6 +57,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/film/**").permitAll()
                         .requestMatchers("/api/v1/genre/**").permitAll()
                         .requestMatchers("/api/v1/actor/**").permitAll()
+                        .requestMatchers("/api/v1/director/**").permitAll()
                         .requestMatchers("/api/v1/country/**").permitAll()
                         .requestMatchers("/api/v1/review/**").permitAll()
                         // Admin
