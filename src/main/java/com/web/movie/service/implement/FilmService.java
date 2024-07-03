@@ -94,4 +94,10 @@ public class FilmService implements IFilmService {
 
         return filmRepository.save(film);
     }
+
+    @Override
+    public Film getFilmById(Integer filmId) {
+        return filmRepository.findById(filmId)
+                .orElseThrow(() -> new ResourceNotFoundException("Không tìm thấy phim có id = " + filmId));
+    }
 }

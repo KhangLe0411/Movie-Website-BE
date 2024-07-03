@@ -24,4 +24,5 @@ public interface IFilmService {
 
     List<Film> getAllFilms();
     Film createFilm(CreateFilmRequest request);
+    Film getFilmById(Integer filmId);
 }

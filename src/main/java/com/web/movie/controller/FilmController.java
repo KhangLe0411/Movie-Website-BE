@@ -1,5 +1,6 @@
 package com.web.movie.controller;
 
+import com.web.movie.entity.Film;
 import com.web.movie.entity.enumType.FilmAccessType;
 import com.web.movie.entity.enumType.FilmType;
 import com.web.movie.payload.dto.EpisodeDTO;
@@ -129,10 +130,35 @@ public class FilmController {
         }
     }
 
-    @PostMapping("/admin/create")
+    @PostMapping("/admin/film")
     public ResponseEntity<?> createFilm(CreateFilmRequest request){
         try{
             return new ResponseEntity<>(filmService.createFilm(request), HttpStatus.CREATED);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/admin/film/{filmId}/detail")
+    public ResponseEntity<?> filmDetail(@PathVariable Integer filmId){
+        try {
+            List<EpisodeDTO> episodes = episodeService.getEpisodesByFilmId(filmId);
+            List<ReviewDTO> reviews = reviewService.getReviewsOfFilm(filmId);
+            Film film = filmService.getFilmById(filmId);
+            Map<String, Object> filmDetailResponse = new HashMap<>();
+            filmDetailResponse.put("episodes", episodes);
+            filmDetailResponse.put("reviews", reviews);
+            filmDetailResponse.put("film", film);
+            return new ResponseEntity<>(filmDetailResponse, HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("admin/film/{filmId}")
+    public ResponseEntity<?> updateFilm(@PathVariable Integer filmId){
+        try{
+            return new ResponseEntity<>(HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
